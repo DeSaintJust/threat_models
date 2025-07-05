@@ -1,5 +1,7 @@
 {
-  "W": [],
-  "R": [[]],
-  "v": {{}}
+  "W": {w1:"Unauthenticated", w2:"Execution on web server"},
+  "R": [[w1, w2]],
+  "v": {
+    "There is an exploitable vulnerability on a public-facing web server":{w1: True}
+  }
 }
