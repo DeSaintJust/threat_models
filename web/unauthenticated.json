@@ -1,9 +1,0 @@
-{
-  "W": {"w1":"Unauthenticated", "w2":"Web server"},
-  "R": [["w1", "w2"]],
-  "v": {
-    "There is an exploitable vulnerability on a public-facing web server":{"w1": "True"},
-    "Possibly execute code on a public-facing web server": {"w1":"True"},
-    "Execute code on a public-facing web server": {"w2":"True"}
-  }
-}
