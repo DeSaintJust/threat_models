@@ -1,6 +1,13 @@
+# Placeholder modal operators (for later logic validation or symbolic model checking)
+def Diamond(p):  # Possibly p
+  return f"◇({p})"
+
+def Box(p):      # Necessarily p
+  return f"□({p})"
+
 # propositions describing conditions that are required for an attack to succeed
 propositions = {
-  "p1":"Adversary has administrative access to a Google Kubernetes Engine Cluster"
+  "p1":"Adversary has administrative access to a Google Kubernetes Engine Cluster",
   "p2":"Adversary does not have access"
 }
 
