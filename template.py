@@ -1,21 +1,35 @@
-# propositions describing conditions that are required for an attack to succeed
-p1 = "<e.g., Code can be executed on a public-facing web server>"
-p2 = "<e.g., There is an exploitable vulnerability on a public-facing web server>"
+# Placeholder modal operators (for later logic validation or symbolic model checking)
+def Diamond(p):  # Possibly p
+  return f"◇({p})"
 
-if p2:
-  Diamond(p1)
+def Box(p):      # Necessarily p
+  return f"□({p})"
+
+# propositions describing conditions that are required for an attack to succeed
+propositions = {
+  "p1":"Adversary has administrative access to a Google Kubernetes Engine Cluster",
+  "p2":"Adversary does not have access"
+}
+
+if propositions["p2"]:
+  Diamond(propositions["p1"])
 
 # mitigations that negate specific propositions
-m1 = "<e.g., Regularly patch and update all software (OS, web apps, libraries).>"
+mitigations = {}
 
-if m1:
+if any(m for ms in mitigations.keys()):
   Box(not p2)
 
-model = {
-  "W": {"w1":"Unauthenticated", "w2":"Web server"},
-  "R": [["w1", "w2"]],
-  "v": {
-    "w1": [p2],
-    "w2": [p1]
-  }
+W = {
+  "w1":"Unauthenticated", 
+  "w2":"Administrative access to Google Kubernetes Engine Cluster"
 }
+
+R = [[W["w1"], W["w2"]]]
+
+v = {
+  W["w1"]: [propositions["p2"]],
+  W["w2"]: [propositions["p1"]]
+}
+
+model = [W, R, v]
