@@ -1,44 +1,31 @@
 # https://unit42.paloaltonetworks.com/hildegard-malware-teamtnt/
 # === Propositions (TTPs) ===
-p1 = "Scan for exposed Kubernetes kubelets with anonymous access"
-p2 = "Gain access to Kubernetes cluster via misconfigured kubelet"
-p3 = "Deploy tmate reverse shell for command and control (C2)"
-p4 = "Establish IRC channel for persistent C2 communication"
-
-# === Mitigations ===
-m1 = "Disable anonymous access to Kubernetes kubelets"
-m2 = "Implement authentication and authorization for kubelet APIs"
-m3 = "Monitor for unauthorized reverse shell connections"
-m4 = "Inspect network traffic for unauthorized IRC communications"
-
-# === Modal Logic Inference ===
-# If mitigations hold, certain attack propositions are necessarily false (Box ¬p)
-if m1:
-    Box(not p1)
-if m2:
-    Box(not p2)
-if m3:
-    Box(not p3)
-if m4:
-    Box(not p4)
+p1 = "Deploy malicious container with elevated privileges"
+p2 = "Escape container to gain access to the host system"
+p3 = "Abuse misconfigured RBAC to escalate privileges"
+p4 = "Access cloud metadata services to obtain credentials"
+p5 = "Establish persistence on the host system"
 
 # === Kripke Model ===
 model = {
     "W": {
-        "w0": "Scanning phase",
-        "w1": "Access gained to Kubernetes cluster",
-        "w2": "Reverse shell deployed",
-        "w3": "IRC channel established"
+        "w0": "Malicious container deployed",
+        "w1": "Container escape achieved",
+        "w2": "RBAC misconfigurations exploited",
+        "w3": "Cloud metadata accessed",
+        "w4": "Persistence established"
     },
     "R": [
         ("w0", "w1"),
         ("w1", "w2"),
-        ("w2", "w3")
+        ("w2", "w3"),
+        ("w3", "w4")
     ],
     "v": {
         "w0": [p1],
         "w1": [p2],
         "w2": [p3],
-        "w3": [p4]
+        "w3": [p4],
+        "w4": [p5]
     }
 }
