@@ -1,12 +1,12 @@
-# propositions
-p1 = "<e.g., Code is executed on a public-facing web server>"
+# propositions describing conditions that are required for an attack to succeed
+p1 = "<e.g., Code can be executed on a public-facing web server>"
 p2 = "<e.g., There is an exploitable vulnerability on a public-facing web server>"
 
 if p2:
   Diamond(p1)
 
-# mitigations
-m1 = "<mitigation description>"
+# mitigations that negate specific propositions
+m1 = "<e.g., Regularly patch and update all software (OS, web apps, libraries).>"
 
 if m1:
   Box(not p2)
